@@ -18,3 +18,8 @@ header {
     border: 0;
     margin-top: 2%;
 }
+
+#display-box {
+    border: 1px;
+    border-style: solid;
+}
