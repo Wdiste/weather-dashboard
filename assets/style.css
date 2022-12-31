@@ -1,0 +1,20 @@
+:root {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+    background-image: linear-gradient(to right, rgb(0, 89, 255) , rgb(61, 2, 125));
+    color: white;
+    margin: 0px;
+    padding: 15px;
+    text-align: center;
+}
+
+#city-submit {
+    width: 100%;
+    background-color: rgba(0, 89, 255, 0.631);
+    color: white;
+    border-radius: 5px;
+    border: 0;
+    margin-top: 2%;
+}
