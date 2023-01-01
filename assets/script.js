@@ -6,8 +6,13 @@ const submit = $('#city-submit');
 const recentList = $('#recent-searches');
 
 // initialize saved searches array
-const savedList = localStorage.getItem('recentSearches');
+if(localStorage.getItem('recentSearches') == null) {
+    console.log('returned null');
+    localStorage.setItem('recentSearches', [])
+}
+    const recentSearches = localStorage.getItem('recentSearches');
 
+console.log(recentSearches);
 
 submit.on('click', getWeather);
 
