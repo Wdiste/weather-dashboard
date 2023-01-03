@@ -23,3 +23,7 @@ header {
     border: 1px;
     border-style: solid;
 }
+
+.recent-searches {
+    list-style-type: none;
+}
