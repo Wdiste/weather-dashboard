@@ -11,7 +11,6 @@ submit.on("click", getWeather);
 
 function getWeather(event) {
   event.preventDefault();
-
   let input = $("#input-city");
 
   // add recent search to list, save to local data
@@ -22,20 +21,20 @@ function getWeather(event) {
     "recentSearches",
     JSON.stringify(cleanArray(recentSearches))
   );
-
+  // update recent searches button list:
   initArray();
 
-  // fetch(`https://api.openweathermap.org/data/2.5/forecast?lat={${lat}}&lon={${lon}}&appid={0bab6c4bf9594e7a0fa86f4f8b8f741f}`, {
-  // method: 'GET', //GET is the default.
-  // credentials: 'same-origin', // include, *same-origin, omit
-  // redirect: 'follow', // manual, *follow, error
-  // })
-  // .then(function (response) {
-  //     return response.json();
-  // })
-  // .then(function (data) {
-  //     console.log(data);
-  // });
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54da9036a4b40ba467ebb59246c77917`, {
+  method: 'GET', //GET is the default.
+  credentials: 'same-origin', // include, *same-origin, omit
+  redirect: 'follow', // manual, *follow, error
+  })
+  .then(function (response) {
+      return response.json();
+  })
+  .then(function (data) {
+      console.log(data);
+  });
 }
 
 function initArray() {
@@ -52,7 +51,7 @@ function initArray() {
       recentList.append(
         $("<li>").append(
           $(
-            `<button type="button" class="btn btn-secondary">${recentSearches[i]}</button>`
+            `<button type="button" class="btn btn-secondary mb-2 form-control">${recentSearches[i]}</button>`
           ).click(getWeather)
         )
       );
@@ -61,5 +60,6 @@ function initArray() {
 };
 
 function cleanArray(array) {
+    // remove all duplicate elements
   return array.filter((item, index) => array.indexOf(item) === index);
 }

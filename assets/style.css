@@ -26,4 +26,5 @@ header {
 
 .recent-searches {
     list-style-type: none;
+    padding: 0;
 }
