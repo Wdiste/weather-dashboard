@@ -1,5 +1,6 @@
 :root {
     font-family: 'Courier New', Courier, monospace;
+    --dark: rgb(17, 25, 87);
 }
 
 header {

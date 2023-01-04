@@ -31,29 +31,21 @@ function getWeather(event) {
       return response.json();
     })
     .then(function (data) {
-      // ~~~ for date conversion.  data.dt is unix code, must be converted.
-      // ~~~ add data.timezone to data.dt; multiply by 1000 for date in seconds
-      let date = new Date(data.list.dt);
-      // having issue with getting accurate times.  need to add 5 hrs to the given time
-      // from openweathermap api
-      // + data.list.timezone) * 1000 + 18000000
-
-      // setting up a template literal for card creation
-      const weatherCardTemplate = 
-      ` <li class="card" style="width:19.5%;display:inline-block;">
-            <div class="card-header">${data.list[0].dt_txt}</div>
-            <ul class="list-group list-group-flush card-list style="display:inline;"">
-              <li class="list-group-item"><img id="wicon" src="https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png" alt="Weather icon"></li>
-              <li class="list-group-item">Temp: ${data.list[0].main.temp}°F</li>
-              <li class="list-group-item">Wind: ${data.list[0].wind.speed}MPH</li>
-              <li class="list-group-item">Humidity: ${data.list[0].main.humidity}%</li>
-            </ul>
-        </li>`;
-      
+      // clean up weather card area and fill with new cards via template literal
       weatherCards.empty();
       for(i = 0; i < 5; i++) {
-        weatherCards.append(weatherCardTemplate);
-      }
+        weatherCards.append(
+        ` <li class="card m-2 bg-dark text-light" style="width:17%;display:inline-block;height:325px;">
+            <div class="card-header ">${data.list[i].dt_txt.split(' ')[0]}</div>
+            <ul class="list-group list-group-flush card-list" style="display:inline;"">
+              <li class="list-group-item bg-dark text-light"><img id="wicon" src="https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png" alt="Weather icon"></li>
+              <li class="list-group-item bg-dark text-light">${data.list[i].weather[0].description}</li>
+              <li class="list-group-item bg-dark text-light">Temp: ${data.list[i].main.temp}°F</li>
+              <li class="list-group-item bg-dark text-light">Wind: ${data.list[i].wind.speed}MPH</li>
+              <li class="list-group-item bg-dark text-light">Humidity: ${data.list[i].main.humidity}%</li>
+            </ul>
+          </li>`);
+      };
 
       console.log(data);
       console.log("Name: " + input.val()); // city name,
