@@ -23,6 +23,7 @@ header {
 #display-box {
     border: 1px;
     border-style: solid;
+    height: 225px;
 }
 
 .recent-searches {
