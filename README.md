@@ -31,16 +31,16 @@ Each search is saved as a button and displayed under the search box.  If the use
 
 >Page appears with instructions upon loading  
 
-![initial page on loading application](./Assets/Images/initial.png)  
+![initial page on loading application](assets/Images/initial.png)  
 
 >After searching for one city, Rome, the forecast is displayed.  
 
-![Forecast loading upon search](./Assets/Images/AfterSearch.png)
+![Forecast loading upon search](assets/Images/AfterSearch.png)
 
 >Search with multiple recent searches displayed.  This is the last search before testing clicking a recent button  
 
-![last search before testing recent search buttons](./Assets/Images/beforeRecent.png)
+![last search before testing recent search buttons](assets/Images/beforeRecent.png)
 
 >This is how the page will appear after a recent search button was clicked  
 
-![Recent search loaded by button click](./Assets/Images/afterRecent.png)
+![Recent search loaded by button click](assets/Images/afterRecent.png)
