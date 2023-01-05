@@ -33,7 +33,7 @@ function getWeather(event) {
     .then(function (data) {
       // clean up weather card area and fill with new cards via template literal
       weatherCards.empty();
-      for(i = 0; i < 5; i++) {
+      for(i = 0; i < 40; i+=8) {
         weatherCards.append(
         ` <li class="card m-2 bg-dark text-light" style="width:17%;display:inline-block;height:325px;">
             <div class="card-header ">${data.list[i].dt_txt.split(' ')[0]}</div>
