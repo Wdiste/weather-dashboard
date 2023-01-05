@@ -31,7 +31,7 @@ Each search is saved as a button and displayed under the search box.  If the use
 
 >Page appears with instructions upon loading  
 
-![initial page on loading application](assets/Images/initial.png)  
+![initial page on loading application](assets/Images/Initial.png)  
 
 >After searching for one city, Rome, the forecast is displayed.  
 
