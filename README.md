@@ -39,8 +39,8 @@ Each search is saved as a button and displayed under the search box.  If the use
 
 >Search with multiple recent searches displayed.  This is the last search before testing clicking a recent button  
 
-![last search before testing recent search buttons](assets/Images/beforeRecent.png)
+![last search before testing recent search buttons](assets/Images/beforeRecent)
 
 >This is how the page will appear after a recent search button was clicked  
 
-![Recent search loaded by button click](assets/Images/afterRecent.png)
+![Recent search loaded by button click](assets/Images/afterRecent)
