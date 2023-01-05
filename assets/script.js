@@ -2,7 +2,7 @@ const submit = $("#city-submit");
 const recentList = $(".recent-searches");
 const weatherCards = $(".weather-cards")
 const weatherReport = $("#display-box")
-var input = $("#input-city");
+const input = $("#input-city");
 var recentSearches = [];
 
 initArray();
@@ -14,6 +14,8 @@ function getWeather(event) {
   // event.target.innerHTML($('#input-city').val());
   console.log(event.target)
   
+  // This comparison is what tells the fetch which input to use.  If the submit button is clicked, use string 
+  // from the input field.  If a recentSearch button was pressed, use the text saved in that button's html.
   if($(event.target).hasClass('current')) {
     var city = input.val();
     console.log('new city submitted');
@@ -48,7 +50,7 @@ function getWeather(event) {
       return response.json();
     })
     .then(function (data) {
-      // clean up instruction and update it with today's forecast
+      // clean up the instructions on first iteration or old forecasts and update it with today's forecast
       weatherReport.html( 
         `<ul class="weather-cards h2 fw-bold bg-secondary text-light">${city}   ${data.list[0].dt_txt.split(' ')[0]} <img id="wicon" src="https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png" alt="Weather icon"></ul>
           <li class="list-group-item fw-bold">${data.list[0].weather[0].description}</li>
@@ -72,14 +74,6 @@ function getWeather(event) {
             </ul>
           </li>`);
       };
-
-      console.log(data);
-      console.log("Name: " + city); // city name,
-      console.log("date: " + data.list[0].dt_txt); // date
-      console.log("Icon: " + data.list[0].weather[0].icon); // weather icon
-      console.log("Temp: " + data.list[0].main.temp); // temp
-      console.log("Wind: " + data.list[0].wind.speed); // wind
-      console.log(`Humidity: ${data.list[0].main.humidity}`); // humidity
     });
 }
 
@@ -88,11 +82,14 @@ function initArray() {
   if (localStorage.getItem("recentSearches") == null) {
     localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
   } else {
-    // if data exists, pull it from saveds
+    // if data exists, pull it from localStorage
     recentSearches = JSON.parse(localStorage.getItem("recentSearches"));
 
     // clean up list to prevent duplicates
     recentList.empty();
+
+    // build buttons for each of the recentSearch data stored locally. Have the recentSearch run the getWeather 
+    // to bring back the forecast for that city
     for (i = 0; i < recentSearches.length; i++) {
       recentList.append(
         $("<li>").append(
@@ -106,6 +103,6 @@ function initArray() {
 }
 
 function cleanArray(array) {
-  // remove all duplicate elements
+  // remove all duplicate elements in array.  Used to prevent buttons overloading screen
   return array.filter((item, index) => array.indexOf(item) === index);
 }
