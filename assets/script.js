@@ -13,18 +13,21 @@ function getWeather(event) {
   event.preventDefault();
   // event.target.innerHTML($('#input-city').val());
   console.log(event.target)
+  
   if($(event.target).hasClass('current')) {
-    console.log('target acquired!');
+    var city = input.val();
+    console.log('new city submitted');
   } else if ($(event.target).hasClass('recent')) {
-    console.log('Abort! Abort!');
+    var city = event.target.textContent;
+    console.log(city);
   }
 
   // add recent search to list, save to local data.  limit to 10 recent searches
   if(recentSearches.length == 10) {
     recentSearches.shift();
-    recentSearches.push(input.val());
+    recentSearches.push(city);
   } else {
-    recentSearches.push(input.val());
+    recentSearches.push(city);
   };
   
 
@@ -34,7 +37,7 @@ function getWeather(event) {
   initArray();
 
   fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?units=imperial&cnt=48&q=${input.val()}&appid=54da9036a4b40ba467ebb59246c77917`,
+    `https://api.openweathermap.org/data/2.5/forecast?units=imperial&cnt=48&q=${city}&appid=54da9036a4b40ba467ebb59246c77917`,
     {
       method: "GET", //GET is the default.
       credentials: "same-origin", // include, *same-origin, omit
@@ -47,7 +50,7 @@ function getWeather(event) {
     .then(function (data) {
       // clean up instruction and update it with today's forecast
       weatherReport.html( 
-        `<ul class="weather-cards h2 fw-bold bg-secondary text-light">${input.val()}   ${data.list[0].dt_txt.split(' ')[0]} <img id="wicon" src="https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png" alt="Weather icon"></ul>
+        `<ul class="weather-cards h2 fw-bold bg-secondary text-light">${city}   ${data.list[0].dt_txt.split(' ')[0]} <img id="wicon" src="https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png" alt="Weather icon"></ul>
           <li class="list-group-item fw-bold">${data.list[0].weather[0].description}</li>
           <li class="list-group-item fw-bold">Temp: ${data.list[0].main.temp}°F</li>
           <li class="list-group-item fw-bold">Wind: ${data.list[0].wind.speed}MPH</li>
@@ -71,7 +74,7 @@ function getWeather(event) {
       };
 
       console.log(data);
-      console.log("Name: " + input.val()); // city name,
+      console.log("Name: " + city); // city name,
       console.log("date: " + data.list[0].dt_txt); // date
       console.log("Icon: " + data.list[0].weather[0].icon); // weather icon
       console.log("Temp: " + data.list[0].main.temp); // temp
