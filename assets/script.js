@@ -2,6 +2,7 @@ const submit = $("#city-submit");
 const recentList = $(".recent-searches");
 const weatherCards = $(".weather-cards")
 const weatherReport = $("#display-box")
+var input = $("#input-city");
 var recentSearches = [];
 
 initArray();
@@ -10,7 +11,13 @@ submit.on("click", getWeather);
 
 function getWeather(event) {
   event.preventDefault();
-  let input = $("#input-city");
+  // event.target.innerHTML($('#input-city').val());
+  console.log(event.target)
+  if($(event.target).hasClass('current')) {
+    console.log('target acquired!');
+  } else if ($(event.target).hasClass('recent')) {
+    console.log('Abort! Abort!');
+  }
 
   // add recent search to list, save to local data.  limit to 10 recent searches
   if(recentSearches.length == 10) {
@@ -46,14 +53,8 @@ function getWeather(event) {
           <li class="list-group-item fw-bold">Wind: ${data.list[0].wind.speed}MPH</li>
           <li class="list-group-item fw-bold">Humidity: ${data.list[0].main.humidity}%</li>`
       );
-      // weatherReport.append(
-      //   `<ul class="weather-cards">${data.list[0].dt_txt.split(' ')[0]}</ul>
-      //       <li class="list-group-item bg-dark text-light"><img id="wicon" src="https://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png" alt="Weather icon"></li>
-      //       <li class="list-group-item bg-dark text-light">${data.list[0].weather[0].description}</li>
-      //       <li class="list-group-item bg-dark text-light">Temp: ${data.list[0].main.temp}°F</li>
-      //       <li class="list-group-item bg-dark text-light">Wind: ${data.list[0].wind.speed}MPH</li>
-      //       <li class="list-group-item bg-dark text-light">Humidity: ${data.list[0].main.humidity}%</li>`)
-      // clean up weather card area and fill with new cards via template literal
+
+      // build 5 day forecast cards
       weatherCards.empty();
       for(i = 5; i < 41; i+=8) {
         weatherCards.append(
@@ -93,7 +94,7 @@ function initArray() {
       recentList.append(
         $("<li>").append(
           $(
-            `<button type="button" class="btn btn-secondary mb-2 form-control">${recentSearches[i]}</button>`
+            `<button type="button" class="btn btn-secondary mb-2 form-control recent">${recentSearches[i]}</button>`
           ).click(getWeather)
         )
       );
